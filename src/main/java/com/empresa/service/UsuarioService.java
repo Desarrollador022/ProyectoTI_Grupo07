@@ -19,12 +19,8 @@ public interface UsuarioService {
 
 	public abstract List<Rol> traerRolesDeUsuario(int idUsuario);
 
-	public abstract Usuario buscaPorLogin(String login);
-	
-	public abstract List<Usuario> buscarporNombre(String nombre);
-	
-	public abstract List<Usuario> listaPorNombreApellidoLike(String filtro);
-	
+	public abstract Usuario buscaPorDni(String dni);
+
 	public abstract List<Usuario> listaJefesLike(String nombre);
 	
 	public abstract List<Usuario> listaPrestamistaLike(String nombre);

@@ -33,4 +33,5 @@ public class Usuario {
 	private String celular;
 	private String email;
 	private String password;
+	private int usureg;
 	}

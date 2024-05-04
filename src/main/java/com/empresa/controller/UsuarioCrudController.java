@@ -22,138 +22,142 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UsuarioCrudController {
 
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private UsuarioHasRolService usuarioHasRolService;
-	
-	
-	@GetMapping("/consultaCrudUsuario")
-	@ResponseBody
-	public List<Usuario> listaAlumno(String filtro){
-		List<Usuario> lstSalida = usuarioService.listaPorNombreApellidoLike("%" + filtro + "%");
-		return lstSalida;
-	}
-	
+
+
+
+
 	@GetMapping("/consultaCrudjefes")
 	@ResponseBody
 	public List<Usuario> listaJefes(String filtro){
 		List<Usuario> lstSalida = usuarioService.listaJefesLike("%" + filtro + "%");
 		return lstSalida;
 	}
-	
+
 	@GetMapping("/consultaCrudPrestamista")
 	@ResponseBody
 	public List<Usuario> listaPrestamista(String filtro){
 		List<Usuario> lstSalida = usuarioService.listaPrestamistaLike("%" + filtro + "%");
 		return lstSalida;
 	}
-	
-	
+
+
 	@GetMapping("/consultaCrudPrestatario")
 	@ResponseBody
 	public List<Usuario> listaPrestatario(String filtro){
 		List<Usuario> lstSalida = usuarioService.listaPrestatarioLike("%" + filtro + "%");
 		return lstSalida;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	@PostMapping("/registraCrudJefe")
 	@ResponseBody
 	public Map<?, ?> registra(Usuario obj, HttpSession session) {
-		
-
 		HashMap<String, String> map = new HashMap<String, String>();
-		Usuario objSalida = usuarioService.insertaUsuario(obj);
-		
-		UsuarioHasRolPK pk = new UsuarioHasRolPK();
-		pk.setIdUsuario(obj.getIdUsuario());
-		pk.setIdRol(2);
-		
-		UsuarioHasRol usuobj = new UsuarioHasRol();
-		usuobj.setUsuarioHasRolPk(pk);
-		
-		usuarioHasRolService.inserta(usuobj);
+		Usuario validadni =usuarioService.buscaPorDni(obj.getDni());
 
-		
-		if (objSalida == null) {
-			map.put("MENSAJE", "Error en el registro");
-		} else {
-			map.put("MENSAJE", "Registro exitoso");
+		if(validadni != null){
+			map.put("mensaje", "El DNI ya está registrado");
+			return map;
 		}
-		
+		else{
+
+
+			Usuario objSalida = usuarioService.insertaUsuario(obj);
+			UsuarioHasRolPK pk = new UsuarioHasRolPK();
+			pk.setIdUsuario(obj.getIdUsuario());
+			pk.setIdRol(2);
+
+			UsuarioHasRol usuobj = new UsuarioHasRol();
+			usuobj.setUsuarioHasRolPk(pk);
+
+			usuarioHasRolService.inserta(usuobj);
+
+
+
+			if (objSalida == null) {
+				map.put("mensaje", "Error en el registro");
+			} else {
+				map.put("mensaje", "Registro exitoso");
+			}
+		}
 		return map;
-		
+
 	}
-	
-	
+
+
 	@PostMapping("/registraCrudPrestamista")
 	@ResponseBody
 	public Map<?, ?> registraPrestamista(Usuario obj, HttpSession session) {
-		
+
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		Usuario objSalida = usuarioService.insertaUsuario(obj);
-		
+
 		UsuarioHasRolPK pk = new UsuarioHasRolPK();
 		pk.setIdUsuario(obj.getIdUsuario());
 		pk.setIdRol(3);
-		
+
 		UsuarioHasRol usuobj = new UsuarioHasRol();
 		usuobj.setUsuarioHasRolPk(pk);
-		
+
 		usuarioHasRolService.inserta(usuobj);
 
-		
+
 		if (objSalida == null) {
-			map.put("MENSAJE", "Error en el registro");
+			map.put("mensaje", "Error en el registro");
 		} else {
-			map.put("MENSAJE", "Registro exitoso");
+			map.put("mensaje", "Registro exitoso");
 		}
-		
+
 		return map;
-		
+
 	}
-	
-	
-	
+
+
+
 	@PostMapping("/registraCrudPrestatario")
 	@ResponseBody
 	public Map<?, ?> registraPrestatario(Usuario obj, HttpSession session) {
-		
+
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		Usuario objSalida = usuarioService.insertaUsuario(obj);
-		
+
 		UsuarioHasRolPK pk = new UsuarioHasRolPK();
 		pk.setIdUsuario(obj.getIdUsuario());
 		pk.setIdRol(4);
-		
+
 		UsuarioHasRol usuobj = new UsuarioHasRol();
 		usuobj.setUsuarioHasRolPk(pk);
-		
+
 		usuarioHasRolService.inserta(usuobj);
 
-		
+
 		if (objSalida == null) {
-			map.put("MENSAJE", "Error en el registro");
+			map.put("mensaje", "Error en el registro");
 		} else {
-			map.put("MENSAJE", "Registro exitoso");
+			map.put("mensaje", "Registro exitoso");
 		}
-		
+
 		return map;
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
+
+
 }

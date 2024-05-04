@@ -34,25 +34,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.traerRolesDeUsuario(idUsuario);
 	}
 
-	@Override
-	public Usuario buscaPorLogin(String login) {
-		return repository.findByDni(login);
-	}
 
 	@Override
 	public Usuario insertaUsuario(Usuario obj) {
 		return repository.save(obj);
 	}
 
-	@Override
-	public List<Usuario> buscarporNombre(String nombre) {
-		return repository.buscaxNombre(nombre);
+	public Usuario buscaPorDni(String dni) {
+		return repository.findByDni(dni);
 	}
 
-	@Override
-	public List<Usuario> listaPorNombreApellidoLike(String filtro) {
-		return repository.listaEmpleadoNombreApellidoLike(filtro);
-	}
+
 
 	@Override
 	public List<Usuario> listaJefesLike(String nombre) {
