@@ -32,6 +32,7 @@
 	<div class="col-md-23" >
 
 		<div class="row" style="height: 70px">
+			<input type="hidden" id="id_txt_usureg" value=${sessionScope.objUsuario.idUsuario}>
 			<div class="col-md-6" >
 				<input class="form-control" id="id_txt_filtro"  name="filtro" placeholder="Ingrese el nombre" type="text" maxlength="30"/>
 			</div>
@@ -295,7 +296,8 @@
 	//boton filtro
 	$("#id_btn_filtrar").click(function(){
 		var fil=$("#id_txt_filtro").val();
-		$.getJSON("consultaCrudPrestamista",{"filtro":fil}, function (lista){
+		var usureg=$("#id_txt_usureg").val();
+		$.getJSON("consultaCrudPrestamista",{"filtro":fil,"usureg":usureg}, function (lista){
 			agregarGrilla(lista);
 		});
 	});
@@ -332,7 +334,7 @@
 		if (validator.isValid()) {
 			$.ajax({
 				type: "POST",
-				url: "registraCrudPrestamista",
+				url: "actualizaCrudPrestamista",
 				data: $('#id_form_actualiza').serialize(),
 				success: function(data){
 					agregarGrilla(data.lista);

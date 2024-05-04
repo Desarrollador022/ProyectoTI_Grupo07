@@ -21,9 +21,9 @@ public interface UsuarioService {
 
 	public abstract Usuario buscaPorDni(String dni);
 
-	public abstract List<Usuario> listaJefesLike(String nombre);
+	public abstract List<Usuario> listaJefesLike(String nombre, int usureg);
 	
-	public abstract List<Usuario> listaPrestamistaLike(String nombre);
+	public abstract List<Usuario> listaPrestamistaLike(String nombre, int usureg);
 	
 	public abstract List<Usuario> listaPrestatarioLike(String nombre);
 	

@@ -34,15 +34,15 @@ public class UsuarioCrudController {
 
 	@GetMapping("/consultaCrudjefes")
 	@ResponseBody
-	public List<Usuario> listaJefes(String filtro){
-		List<Usuario> lstSalida = usuarioService.listaJefesLike("%" + filtro + "%");
+	public List<Usuario> listaJefes(String filtro, int usureg){
+		List<Usuario> lstSalida = usuarioService.listaJefesLike("%" + filtro + "%",usureg);
 		return lstSalida;
 	}
 
 	@GetMapping("/consultaCrudPrestamista")
 	@ResponseBody
-	public List<Usuario> listaPrestamista(String filtro){
-		List<Usuario> lstSalida = usuarioService.listaPrestamistaLike("%" + filtro + "%");
+	public List<Usuario> listaPrestamista(String filtro, int usureg){
+		List<Usuario> lstSalida = usuarioService.listaPrestamistaLike("%" + filtro + "%", usureg);
 		return lstSalida;
 	}
 
@@ -103,16 +103,83 @@ public class UsuarioCrudController {
 
 
 		HashMap<String, String> map = new HashMap<String, String>();
+		Usuario validadni =usuarioService.buscaPorDni(obj.getDni());
+
+		if(validadni != null){
+			map.put("mensaje", "El DNI ya está registrado");
+			return map;
+		}
+		else{
+
+
+			Usuario objSalida = usuarioService.insertaUsuario(obj);
+			UsuarioHasRolPK pk = new UsuarioHasRolPK();
+			pk.setIdUsuario(obj.getIdUsuario());
+			pk.setIdRol(3);
+
+			UsuarioHasRol usuobj = new UsuarioHasRol();
+			usuobj.setUsuarioHasRolPk(pk);
+
+			usuarioHasRolService.inserta(usuobj);
+
+
+
+			if (objSalida == null) {
+				map.put("mensaje", "Error en el registro");
+			} else {
+				map.put("mensaje", "Registro exitoso");
+			}
+		}
+		return map;
+
+	}
+
+
+
+	@PostMapping("/registraCrudPrestatario")
+	@ResponseBody
+	public Map<?, ?> registraPrestatario(Usuario obj, HttpSession session) {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		Usuario validadni =usuarioService.buscaPorDni(obj.getDni());
+
+		if(validadni != null){
+			map.put("mensaje", "El DNI ya está registrado");
+			return map;
+		}
+		else{
+
+
+			Usuario objSalida = usuarioService.insertaUsuario(obj);
+			UsuarioHasRolPK pk = new UsuarioHasRolPK();
+			pk.setIdUsuario(obj.getIdUsuario());
+			pk.setIdRol(4);
+
+			UsuarioHasRol usuobj = new UsuarioHasRol();
+			usuobj.setUsuarioHasRolPk(pk);
+
+			usuarioHasRolService.inserta(usuobj);
+
+
+
+			if (objSalida == null) {
+				map.put("mensaje", "Error en el registro");
+			} else {
+				map.put("mensaje", "Registro exitoso");
+			}
+		}
+
+		return map;
+
+	}
+
+	@PostMapping("/actualizaCrudJefe")
+	@ResponseBody
+	public Map<?, ?> actualizaJefe(Usuario obj, HttpSession session) {
+
+
+		HashMap<String, String> map = new HashMap<String, String>();
 		Usuario objSalida = usuarioService.insertaUsuario(obj);
-
-		UsuarioHasRolPK pk = new UsuarioHasRolPK();
-		pk.setIdUsuario(obj.getIdUsuario());
-		pk.setIdRol(3);
-
-		UsuarioHasRol usuobj = new UsuarioHasRol();
-		usuobj.setUsuarioHasRolPk(pk);
-
-		usuarioHasRolService.inserta(usuobj);
 
 
 		if (objSalida == null) {
@@ -124,31 +191,37 @@ public class UsuarioCrudController {
 		return map;
 
 	}
-
-
-
-	@PostMapping("/registraCrudPrestatario")
+	@PostMapping("/actualizaCrudPrestamista")
 	@ResponseBody
-	public Map<?, ?> registraPrestatario(Usuario obj, HttpSession session) {
+	public Map<?, ?> actualizaCrudPrestamista(Usuario obj, HttpSession session) {
 
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		Usuario objSalida = usuarioService.insertaUsuario(obj);
 
-		UsuarioHasRolPK pk = new UsuarioHasRolPK();
-		pk.setIdUsuario(obj.getIdUsuario());
-		pk.setIdRol(4);
 
-		UsuarioHasRol usuobj = new UsuarioHasRol();
-		usuobj.setUsuarioHasRolPk(pk);
+		if (objSalida == null) {
+			map.put("mensaje", "Error en el registro");
+		} else {
+			map.put("mensaje", "Actualizacion exitosa");
+		}
 
-		usuarioHasRolService.inserta(usuobj);
+		return map;
+
+	}
+	@PostMapping("/actualizaCrudPrestatario")
+	@ResponseBody
+	public Map<?, ?> actualizaCrudPrestatario(Usuario obj, HttpSession session) {
+
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		Usuario objSalida = usuarioService.insertaUsuario(obj);
 
 
 		if (objSalida == null) {
 			map.put("mensaje", "Error en el registro");
 		} else {
-			map.put("mensaje", "Registro exitoso");
+			map.put("mensaje", "Actualizacion exitosa");
 		}
 
 		return map;

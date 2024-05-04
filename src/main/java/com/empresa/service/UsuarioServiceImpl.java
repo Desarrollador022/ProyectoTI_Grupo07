@@ -47,14 +47,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 
 	@Override
-	public List<Usuario> listaJefesLike(String nombre) {
+	public List<Usuario> listaJefesLike(String nombre,int usureg) {
 		// TODO Auto-generated method stub
-		return repository.listaJefesLike(nombre);
+		return repository.listaJefesLike(nombre, usureg);
 	}
 
 	@Override
-	public List<Usuario> listaPrestamistaLike(String nombre) {
-		return repository.listaPrestamistaLike(nombre);
+	public List<Usuario> listaPrestamistaLike(String nombre, int usureg) {
+		return repository.listaPrestamistaLike(nombre, usureg);
 	}
 
 	@Override

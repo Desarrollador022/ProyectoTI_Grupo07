@@ -15,7 +15,7 @@ public class EnlaceController {
 	public String verIntranetHome() {	return "intranetHome";  }
 
 	//Registro
-	@GetMapping("/verCrudJefes")
+	@GetMapping("/verCrudJefe")
 	public String verCrudJefes() {	return "CrudJefes";	}
 
 	@GetMapping("/verCrudPrestamistas")

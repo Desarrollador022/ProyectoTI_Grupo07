@@ -32,6 +32,7 @@
 	<div class="col-md-23" >
 
 		<div class="row" style="height: 70px">
+			<input type="hidden" id="id_txt_usureg" value="${sessionScope.objUsuario.idUsuario}">
 			<div class="col-md-6" >
 				<input class="form-control" id="id_txt_filtro"  name="filtro" placeholder="Ingrese el nombre" type="text" maxlength="30"/>
 			</div>
@@ -95,21 +96,15 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+											<label class="col-lg-3 control-label" for="id_reg_apellido">Apellidos</label>
 											<div class="col-lg-8">
-												<input class="form-control" id="id_reg_apellidos" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
+												<input class="form-control" id="id_reg_apellido" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-lg-3 control-label" for="id_reg_dni">DNI</label>
 											<div class="col-lg-3">
 												<input class="form-control" type="text" id="id_reg_dni" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8"/>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_login">Usuario</label>
-											<div class="col-lg-3">
-												<input class="form-control" type="text" id="id_reg_login" name="login"  placeholder="Ingrese su nombre de usuario"/>
 											</div>
 										</div>
 										<div class="form-group">
@@ -131,7 +126,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<input type="hidden" id="id_reg_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
+											<input type="hidden" id="id_act_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
 
 										<div class="form-group">
 											<div class="col-lg-9 col-lg-offset-3">
@@ -163,7 +158,7 @@
 			<div class="modal-content">
 				<div class="modal-header" style="padding: 35px 50px">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualiz&aacute Jefe</h4>
+					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualizar Jefe</h4>
 				</div>
 				<div class="modal-body" style="padding: 20px 10px;">
 					<form id="id_form_actualiza" accept-charset="UTF-8" class="form-horizontal"     method="post">
@@ -177,50 +172,48 @@
 									<div class="panel-body">
 
 
-										<div class="panel-body">
+										<div class="form-group">
+											<div class="col-lg-3">
+												<input class="form-control" type="hidden" id="id_act_idA" name="idUsuario" maxlength="8"  />
+											</div></div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
+												<label class="col-lg-3 control-label" for="id_act_nombresA">Nombres</label>
 												<div class="col-lg-8">
-													<input class="form-control" id="id_reg_nombresA" name="nombre" placeholder="Ingrese el nombre" type="text" maxlength="20"/>
+													<input class="form-control" id="id_act_nombresA" name="nombre" placeholder="Ingrese el nombre" type="text" maxlength="20"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+												<label class="col-lg-3 control-label" for="id_act_apellidoA">Apellidos</label>
 												<div class="col-lg-8">
-													<input class="form-control" id="id_reg_apellidosA" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
+													<input class="form-control" id="id_act_apellidoA" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_dni">DNI</label>
+												<label class="col-lg-3 control-label" for="id_act_dniA">DNI</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_dniA" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8"/>
+													<input class="form-control" type="text" id="id_act_dniA" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8" readonly/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_login">Usuario</label>
+												<label class="col-lg-3 control-label" for="id_act_passwordA">Contraseña</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_loginA" name="login"  placeholder="Ingrese su nombre de usuario"/>
+													<input class="form-control" type="text" id="id_act_passwordA" name="password"  placeholder="Ingrese su Contraseña"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_password">Contraseña</label>
+												<label class="col-lg-3 control-label" for="id_act_correoA">Correo</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_passwordA" name="password"  placeholder="Ingrese su Contraseña"/>
+													<input class="form-control" type="text" id="id_act_correoA" name="email"  placeholder="Ingrese su correo"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_correo">Correo</label>
+												<label class="col-lg-3 control-label" for="id_act_celularA">Celular</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_correoA" name="email"  placeholder="Ingrese su correo"/>
+													<input class="form-control" type="text" id="id_act_celularA" name="celular" onkeypress="return soloNumeros(event)" placeholder="Ingrese su Celular" maxlength="9"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_dni">Celular</label>
-												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_celularA" name="celular" onkeypress="return soloNumeros(event)" placeholder="Ingrese su Celular" maxlength="9"/>
-												</div>
-											</div>
-
+												<input type="hidden" id="id_reg_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
 
 
 
@@ -293,7 +286,7 @@
 				{data: "email"},
 				{data: "celular"},
 				{data: function(row, type, val, meta){
-						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+row.idUsuario + '\',\'' + row.nombre +'\',\'' + row.password  +'\',\'' + row.dni + '\',\'' + row.correo + row.celular +  '\')">Editar</button>';
+						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+row.idUsuario + '\',\'' + row.nombre +  '\',\'' + row.apellido +'\',\'' + row.password  +'\',\'' + row.dni + '\',\'' + row.email+ '\',\'' + row.celular +  '\')">Editar</button>';
 						return salida;
 					},className:'text-center'},
 
@@ -303,7 +296,8 @@
 	//boton filtro
 	$("#id_btn_filtrar").click(function(){
 		var fil=$("#id_txt_filtro").val();
-		$.getJSON("consultaCrudjefes",{"filtro":fil}, function (lista){
+		var usureg=$("#id_txt_usureg").val();
+		$.getJSON("consultaCrudjefes",{"filtro":fil,"usureg":usureg}, function (lista){
 			agregarGrilla(lista);
 		});
 	});
@@ -340,7 +334,7 @@
 		if (validator.isValid()) {
 			$.ajax({
 				type: "POST",
-				url: "registraCrudJefe",
+				url: "actualizaCrudJefe",
 				data: $('#id_form_actualiza').serialize(),
 				success: function(data){
 					agregarGrilla(data.lista);
@@ -370,16 +364,14 @@
 			}
 		});
 	}
-	function editar(id,nombres,apellidos,telefono,dni,correo,fechaNacimiento,pais,modalidad){
-		$('#id_ID').val(id);
-		$('#id_act_nombres').val(nombres);
-		$('#id_act_apellidos').val(apellidos);
-		$('#id_act_telefono').val(telefono);
-		$('#id_act_dni').val(dni);
-		$('#id_act_correo').val(correo);
-		$('#id_act_fecha_nacimiento').val(fechaNacimiento);
-		$('#id_act_pais').val(pais);
-		$('#id_act_grado').val(modalidad);
+	function editar(idUsuario,nombre,apellido,password,dni,email,celular){
+		$('#id_act_idA').val(idUsuario);
+		$('#id_act_nombresA').val(nombre);
+		$('#id_act_apellidoA').val(apellido);
+		$('#id_act_passwordA').val(password);
+		$('#id_act_celularA').val(celular);
+		$('#id_act_dniA').val(dni);
+		$('#id_act_correoA').val(email);
 		$('#id_div_modal_actualiza').modal("show");
 	}
 
