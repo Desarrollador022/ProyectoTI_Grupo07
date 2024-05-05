@@ -590,7 +590,7 @@
 						message: 'El Tel�fono es Requerido'
 					},
 					regexp: {
-						regexp: /^[0-9]{9}$/,
+						regexp: /^[0-9]{8}$/,
 						message: 'El Tel�fono debe tener 9 d�gitos'
 					},
 					//remote :{

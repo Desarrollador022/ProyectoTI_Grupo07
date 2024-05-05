@@ -439,7 +439,7 @@
 						message: 'El DNI es requerido'
 					},
 					regexp: {
-						regexp: /^[0-8]{8}$/,
+						regexp: /^[0-9]{8}$/,
 						message: 'El DNI debe tener 8 d�gitos'
 					}
 				}
