@@ -9,7 +9,6 @@
 	<meta http-equiv="Cache-Control" content="private" />
 	<meta http-equiv="Cache-Control" content="no-store" />
 	<meta http-equiv="Pragma" content="no-cache" />
-
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
@@ -67,7 +66,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="modal fade" id="id_div_modal_registra" >
 		<div class="modal-dialog" style="width: 60%">
 
@@ -137,11 +135,6 @@
 												<button type="button" class="btn btn-primary" id="id_btn_registra">REGISTRA</button>
 											</div>
 										</div>
-
-
-
-
-
 									</div>
 								</div>
 							</div>
