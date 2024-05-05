@@ -17,6 +17,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootstrapValidator.js"></script>
 
+
 <link rel="stylesheet" href="css/bootstrap.css"/>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 <link rel="stylesheet" href="css/bootstrapValidator.css"/>
@@ -25,29 +26,29 @@
 <title>Intranet</title>
 </head>
 <body>
-       
+
 <jsp:include page="intranetCabecera.jsp" />
 
 <div class="container" style="margin-top: 5%">
 <h3>Sistema de prestamos</h3>
 <br><br>
-<h4>Bienvenido Sr(a): ${sessionScope.objUsuario.dni}</h4><br>                
+<h4>Bienvenido Sr(a): ${sessionScope.objUsuario.dni}</h4><br>
 <h4>DNI: ${sessionScope.objUsuario.dni}</h4><br>
 <h4>Roles:</h4>
 	<ul>
         <c:forEach var="x" items="${sessionScope.objRoles}">
             <li>
-                   ${x.nombre} 
+                   ${x.nombre}
             </li>
         </c:forEach>
     </ul><br>
 </div>
 
 <div class="container" >
-<div class="col-md-12" align="center" style="width: 50px; height: 150px" > 
+<div class="col-md-12" align="center" style="width: 50px; height: 150px" >
 </div>
 </div>
 
-    		
+
 </body>
 </html>
