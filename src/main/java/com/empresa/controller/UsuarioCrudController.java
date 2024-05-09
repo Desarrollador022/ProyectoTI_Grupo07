@@ -49,8 +49,8 @@ public class UsuarioCrudController {
 
 	@GetMapping("/consultaCrudPrestatario")
 	@ResponseBody
-	public List<Usuario> listaPrestatario(String filtro){
-		List<Usuario> lstSalida = usuarioService.listaPrestatarioLike("%" + filtro + "%");
+	public List<Usuario> listaPrestatario(String filtro, int usureg){
+		List<Usuario> lstSalida = usuarioService.listaPrestatarioLike("%" + filtro + "%", usureg);
 		return lstSalida;
 	}
 
@@ -229,8 +229,7 @@ public class UsuarioCrudController {
 	}
 
 
-
-
-
-
 }
+
+
+

@@ -25,7 +25,7 @@ public interface UsuarioService {
 	
 	public abstract List<Usuario> listaPrestamistaLike(String nombre, int usureg);
 	
-	public abstract List<Usuario> listaPrestatarioLike(String nombre);
+	public abstract List<Usuario> listaPrestatarioLike(String nombre, int usureg);
 	
 	
 }

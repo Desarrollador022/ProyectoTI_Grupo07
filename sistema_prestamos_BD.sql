@@ -1,0 +1,195 @@
+-- MySQL Workbench Forward Engineering
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema sistema_prestamos
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema sistema_prestamos
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `sistema_prestamos` DEFAULT CHARACTER SET utf8mb3 ;
+USE `sistema_prestamos` ;
+
+-- -----------------------------------------------------
+-- Table `sistema_prestamos`.`usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
+  `idusuario` int NOT NULL AUTO_INCREMENT,
+  `dni` varchar(8) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `nombre` varchar(15) DEFAULT NULL,
+  `apellido` varchar(20) DEFAULT NULL,
+  `celular` varchar(9)  NULL,
+  `email` varchar(40)  NULL,
+    `usureg` int not NULL,
+  PRIMARY KEY (`idusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'77777777','77777777','Inversionista','Inversionista','123456789','inver@email.com',1);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario_has_rol`
+DROP TABLE IF EXISTS `zona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `zona` (
+  `idzona` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) NOT NULL,
+  PRIMARY KEY (`idzona`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zona`
+--
+
+LOCK TABLES `zona` WRITE;
+/*!40000 ALTER TABLE `zona` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+-- -----------------------------------------------------
+-- Table `sistema_prestamos`.`detalle_tipo_zona`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sistema_prestamos`.`detalle_tipo_zona` (
+  `idUsuario` INT NOT NULL,
+  `idZona` INT NOT NULL,
+  INDEX `fk_idUsuario_idx` (`idUsuario` ASC) VISIBLE,
+  INDEX `fk_idZona_idx` (`idZona` ASC) VISIBLE,
+  CONSTRAINT `fk_idUsuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `sistema_prestamos`.`usuario` (`idUsuario`),
+  CONSTRAINT `fk_idZona`
+    FOREIGN KEY (`idZona`)
+    REFERENCES `sistema_prestamos`.`zona` (`idZona`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `sistema_prestamos`.`opcion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `opcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `opcion` (
+  `idopcion` int NOT NULL AUTO_INCREMENT,
+  `estado` int DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `ruta` varchar(100) DEFAULT NULL,
+  `tipo` int DEFAULT NULL,
+  PRIMARY KEY (`idopcion`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `opcion`
+--
+
+LOCK TABLES `opcion` WRITE;
+/*!40000 ALTER TABLE `opcion` DISABLE KEYS */;
+INSERT INTO `opcion` VALUES (1,1,'Crud Jefe de Prestamista','verCrudJefe',1);
+INSERT INTO `opcion` VALUES (2,2,'Crud Prestamista','verCrudPrestamistas',1);
+INSERT INTO `opcion` VALUES (3,2,'Crud Prestatario','verCrudPrestatarios',1);
+/*!40000 ALTER TABLE `opcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prestamista`
+--
+
+
+DROP TABLE IF EXISTS `rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rol` (
+  `idrol` int NOT NULL AUTO_INCREMENT,
+  `estado` int DEFAULT NULL,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`idrol`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rol`
+--
+
+LOCK TABLES `rol` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (1,1,'Invercionista'),(2,1,'Jefe de Prestamista'),(3,1,'Prestamista'),(4,1,'Prestatario');
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for tabl
+
+-- -----------------------------------------------------
+-- Table `sistema_prestamos`.`rol_has_opcion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `rol_has_opcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rol_has_opcion` (
+  `idOpcion` int NOT NULL,
+  `idRol` int NOT NULL,
+  KEY `fkrol_idx` (`idRol`),
+  KEY `fkopcion_idx` (`idOpcion`),
+  CONSTRAINT `fkopcion` FOREIGN KEY (`idOpcion`) REFERENCES `opcion` (`idopcion`),
+  CONSTRAINT `fkrol` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idrol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rol_has_opcion`
+--
+
+LOCK TABLES `rol_has_opcion` WRITE;
+/*!40000 ALTER TABLE `rol_has_opcion` DISABLE KEYS */;
+INSERT INTO `rol_has_opcion` VALUES (1,1);
+INSERT INTO `rol_has_opcion` VALUES (2,2);
+INSERT INTO `rol_has_opcion` VALUES (3,3);
+INSERT INTO `rol_has_opcion` VALUES (4,4);
+/*!40000 ALTER TABLE `rol_has_opcion` ENABLE KEYS */;
+UNLOCK TABLES;
+-- -----------------------------------------------------
+-- Table `sistema_prestamos`.`usuario_has_rol`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `usuario_has_rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario_has_rol` (
+  `idusuario` int DEFAULT NULL,
+  `idrol` int DEFAULT NULL,
+  KEY `fkusuario_idx` (`idusuario`),
+  KEY `fkrol_idx` (`idrol`),
+  CONSTRAINT `fkrolusuario` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`),
+  CONSTRAINT `fkusuariorol` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario_has_rol`
+--
+
+LOCK TABLES `usuario_has_rol` WRITE;
+/*!40000 ALTER TABLE `usuario_has_rol` DISABLE KEYS */;
+INSERT INTO `usuario_has_rol` VALUES (1,1);
+/*!40000 ALTER TABLE `usuario_has_rol` ENABLE KEYS */;
+UNLOCK TABLES;

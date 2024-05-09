@@ -5,10 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="Expires" content="-1" />
-	<meta http-equiv="Cache-Control" content="private" />
-	<meta http-equiv="Cache-Control" content="no-store" />
-	<meta http-equiv="Pragma" content="no-cache" />
+
 
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
@@ -126,7 +123,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<input type="hidden" id="id_act_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
+											<input type="hidden" id="idreg_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
 
 										<div class="form-group">
 											<div class="col-lg-9 col-lg-offset-3">
@@ -213,7 +210,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<input type="hidden" id="id_reg_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
+												<input type="hidden" id="id_act_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
 
 
 
@@ -229,7 +226,7 @@
 								</div>
 
 							</div>
-						</div>
+
 					</form>
 
 				</div>
@@ -286,7 +283,7 @@
 				{data: "email"},
 				{data: "celular"},
 				{data: function(row, type, val, meta){
-						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+row.idUsuario + '\',\'' + row.nombre +  '\',\'' + row.apellido +'\',\'' + row.password  +'\',\'' + row.dni + '\',\'' + row.email+ '\',\'' + row.celular +  '\')">Editar</button>';
+						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+ row.idUsuario +'\',\''+row.nombre + '\',\'' + row.apellido +'\',\'' + row.password  +'\',\'' + row.dni + '\',\'' + row.email+ '\',\'' + row.celular + '\')">Editar</button>';
 						return salida;
 					},className:'text-center'},
 
@@ -340,6 +337,8 @@
 					agregarGrilla(data.lista);
 					$('#id_div_modal_actualiza').modal("hide");
 					mostrarMensaje(data.mensaje);
+					limpiarFormulario();
+					validator.resetForm();
 				},
 				error: function(){
 					mostrarMensaje(MSG_ERROR);

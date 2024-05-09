@@ -94,21 +94,15 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+											<label class="col-lg-3 control-label" for="id_reg_apellido">Apellidos</label>
 											<div class="col-lg-8">
-												<input class="form-control" id="id_reg_apellidos" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
+												<input class="form-control" id="id_reg_apellido" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-lg-3 control-label" for="id_reg_dni">DNI</label>
 											<div class="col-lg-3">
 												<input class="form-control" type="text" id="id_reg_dni" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8"/>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_login">Usuario</label>
-											<div class="col-lg-3">
-												<input class="form-control" type="text" id="id_reg_login" name="login"  placeholder="Ingrese su nombre de usuario"/>
 											</div>
 										</div>
 										<div class="form-group">
@@ -164,7 +158,7 @@
 			<div class="modal-content">
 				<div class="modal-header" style="padding: 35px 50px">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualiz&aacute Prestamistas</h4>
+					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualizar Prestamistas</h4>
 				</div>
 				<div class="modal-body" style="padding: 20px 10px;">
 					<form id="id_form_actualiza" accept-charset="UTF-8" class="form-horizontal"     method="post">
@@ -286,7 +280,7 @@
 				{data: "email"},
 				{data: "celular"},
 				{data: function(row, type, val, meta){
-						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+ row.idUsuario +'\',\''+row.nombre + '\',\'' + row.apellido +'\',\'' + row.password  +'\',\'' + row.celular + '\',\'' + row.dni + '\',\''+ row.email + '\')">Editar</button>';
+						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+ row.idUsuario +'\',\''+row.nombre + '\',\'' + row.apellido +'\',\'' + row.dni +'\',\'' +  row.password + '\',\'' + row.email+ '\',\'' + row.celular + '\')">Editar</button>';
 						return salida;
 					},className:'text-center'},
 
@@ -340,6 +334,8 @@
 					agregarGrilla(data.lista);
 					$('#id_div_modal_actualiza').modal("hide");
 					mostrarMensaje(data.mensaje);
+					limpiarFormulario();
+					validator.resetForm();
 				},
 				error: function(){
 					mostrarMensaje(MSG_ERROR);
@@ -364,14 +360,14 @@
 			}
 		});
 	}
-	function editar(idUsuario,nombre,apellido,password,celular,dni,email){
+	function editar(idUsuario,nombre,apellido,dni,password,email,celular){
 		$('#id_act_idA').val(idUsuario);
 		$('#id_act_nombresA').val(nombre);
 		$('#id_act_apellidoA').val(apellido);
-		$('#id_act_passwordA').val(password);
-		$('#id_act_celularA').val(celular);
 		$('#id_act_dniA').val(dni);
+		$('#id_act_passwordA').val(password);
 		$('#id_act_correoA').val(email);
+		$('#id_act_celularA').val(celular);
 		$('#id_div_modal_actualiza').modal("show");
 	}
 
@@ -447,7 +443,7 @@
 						message: 'El DNI es requerido'
 					},
 					regexp: {
-						regexp: /^[0-8]{8}$/,
+						regexp: /^[0-9]{8}$/,
 						message: 'El DNI debe tener 8 d�gitos'
 					}
 				}
