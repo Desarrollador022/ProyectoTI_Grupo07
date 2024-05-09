@@ -107,6 +107,8 @@ LOCK TABLES `opcion` WRITE;
 INSERT INTO `opcion` VALUES (1,1,'Crud Jefe de Prestamista','verCrudJefe',1);
 INSERT INTO `opcion` VALUES (2,2,'Crud Prestamista','verCrudPrestamistas',1);
 INSERT INTO `opcion` VALUES (3,2,'Crud Prestatario','verCrudPrestatarios',1);
+INSERT INTO `opcion`  VALUES ('4', '2', 'SolicitudPrestamo', 'verSolicitudPrestamo', '1');
+
 /*!40000 ALTER TABLE `opcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,3 +195,16 @@ LOCK TABLES `usuario_has_rol` WRITE;
 INSERT INTO `usuario_has_rol` VALUES (1,1);
 /*!40000 ALTER TABLE `usuario_has_rol` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+CREATE TABLE `sistema_prestamos`.`solicitudprestamos` (
+  `idSolicitudPrestamos` INT NOT NULL,
+  `monto` CHAR(9) NULL,
+  `fechaInicio` DATE NULL,
+  `fechaFin` DATE NULL,
+  `dias` INT NULL,
+  `pagodiario` VARCHAR(45) NOT NULL,
+  `estado` INT NULL,
+  `usureg` INT NULL,
+  PRIMARY KEY (`idSolicitudPrestamos`));
+

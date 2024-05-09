@@ -24,6 +24,8 @@ public class EnlaceController {
 	@GetMapping("/verCrudPrestatarios")
 	public String verCrudPrestatario() {	return "CrudPrestatarios";	}
 
+	@GetMapping("/verSolicitudPrestamo")
+	public String verSolicitudPrestamo() {	return "SolicitudPrestamo";	}
 
 
 
