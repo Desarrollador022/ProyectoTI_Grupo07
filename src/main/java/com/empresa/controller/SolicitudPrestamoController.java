@@ -35,7 +35,6 @@ import jakarta.transaction.Transactional;
 public class SolicitudPrestamoController {
 
 
-    public class SolicitudPrestamoRegistraController {
 
 
         @Autowired
@@ -173,4 +172,3 @@ public class SolicitudPrestamoController {
 
 
     }
-}

@@ -182,4 +182,16 @@ img { max-width: 100%; }
 	h1, h2 { font-size: 32px; }
 
 }
+table {
+	border-collapse: collapse;
+}
+
+button{
+	border-style: solid;
+	border-radius: 20px;
+}
+
+.prestamo:hover{
+
+}
 

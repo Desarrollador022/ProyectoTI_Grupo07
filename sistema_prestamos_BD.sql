@@ -197,8 +197,10 @@ INSERT INTO `usuario_has_rol` VALUES (1,1);
 UNLOCK TABLES;
 
 
+    DROP TABLE `solicitudprestamos`;
+
 CREATE TABLE `sistema_prestamos`.`solicitudprestamos` (
-  `idSolicitudPrestamos` INT NOT NULL,
+  `idSolicitudPrestamos` int NOT NULL AUTO_INCREMENT,
   `monto` CHAR(9) NULL,
   `fechaInicio` DATE NULL,
   `fechaFin` DATE NULL,
@@ -206,5 +208,20 @@ CREATE TABLE `sistema_prestamos`.`solicitudprestamos` (
   `pagodiario` VARCHAR(45) NOT NULL,
   `estado` INT NULL,
   `usureg` INT NULL,
-  PRIMARY KEY (`idSolicitudPrestamos`));
+   PRIMARY KEY (`idSolicitudPrestamos`)
+    );
+    
+    
+    
+    DROP TABLE IF EXISTS `solicitud_has_Estado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `solicitud_has_Estado` (
+  `idSolicitudPrestamos` int DEFAULT NULL,
+  `descripcion` int DEFAULT NULL,
+  KEY `fksolipres_idx` (`idSolicitudPrestamos`),
+  CONSTRAINT `fksolides` FOREIGN KEY (`idSolicitudPrestamos`) REFERENCES `solicitudprestamos` (`idSolicitudPrestamos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    
+    
 
