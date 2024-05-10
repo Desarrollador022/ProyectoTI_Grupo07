@@ -33,8 +33,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Query("select u from Usuario u, UsuarioHasRol r where u.idUsuario = r.usuario.idUsuario and r.rol.idRol = 3 and u.nombre like ?1 and u.usureg=?2")
 	public List<Usuario> listaPrestamistaLike(String nombre, int usureg);
 
-	@Query("select u from Usuario u, UsuarioHasRol r where u.idUsuario = r.usuario.idUsuario and r.rol.idRol = 4 and u.nombre like ?1 ")
-	public List<Usuario> listaPrestatariosLike(String nombre);
+	@Query("select u from Usuario u, UsuarioHasRol r where u.idUsuario = r.usuario.idUsuario and r.rol.idRol = 4 and u.nombre like ?1 and u.usureg=?2")
+	public List<Usuario> listaPrestatariosLike(String nombre, int usureg);
 	
 	
 }

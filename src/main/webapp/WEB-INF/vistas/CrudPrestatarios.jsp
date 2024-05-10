@@ -5,11 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="Expires" content="-1" />
-	<meta http-equiv="Cache-Control" content="private" />
-	<meta http-equiv="Cache-Control" content="no-store" />
-	<meta http-equiv="Pragma" content="no-cache" />
-
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
@@ -32,6 +27,7 @@
 	<div class="col-md-23" >
 
 		<div class="row" style="height: 70px">
+			<input type="hidden" id="id_txt_usureg" value="${sessionScope.objUsuario.idUsuario}">
 			<div class="col-md-6" >
 				<input class="form-control" id="id_txt_filtro"  name="filtro" placeholder="Ingrese el nombre" type="text" maxlength="30"/>
 			</div>
@@ -93,21 +89,15 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+											<label class="col-lg-3 control-label" for="id_reg_apellido">Apellidos</label>
 											<div class="col-lg-8">
-												<input class="form-control" id="id_reg_apellidos" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
+												<input class="form-control" id="id_reg_apellido" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-lg-3 control-label" for="id_reg_dni">DNI</label>
 											<div class="col-lg-3">
 												<input class="form-control" type="text" id="id_reg_dni" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8"/>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_login">Usuario</label>
-											<div class="col-lg-3">
-												<input class="form-control" type="text" id="id_reg_login" name="login"  placeholder="Ingrese su nombre de usuario"/>
 											</div>
 										</div>
 										<div class="form-group">
@@ -123,16 +113,23 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label" for="id_reg_fecha_nacimiento">Fecha Nacimiento</label>
+											<label class="col-lg-3 control-label" for="id_reg_dni">Celular</label>
 											<div class="col-lg-3">
-												<input class="form-control" id="id_reg_fecha_nacimiento" name="fechaNacimiento" type="date"/>
+												<input class="form-control" type="text" id="id_reg_celular" name="celular" onkeypress="return soloNumeros(event)" placeholder="Ingrese su Celular" maxlength="9"/>
 											</div>
 										</div>
+										<div class="form-group">
+											<input type="hidden" id="idreg_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
+
 										<div class="form-group">
 											<div class="col-lg-9 col-lg-offset-3">
 												<button type="button" class="btn btn-primary" id="id_btn_registra">REGISTRA</button>
 											</div>
 										</div>
+
+
+
+
 
 									</div>
 								</div>
@@ -155,7 +152,7 @@
 			<div class="modal-content">
 				<div class="modal-header" style="padding: 35px 50px">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualiz&aacute Prestatarios</h4>
+					<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualizar Prestatarios</h4>
 				</div>
 				<div class="modal-body" style="padding: 20px 10px;">
 					<form id="id_form_actualiza" accept-charset="UTF-8" class="form-horizontal"     method="post">
@@ -170,48 +167,53 @@
 
 
 										<div class="panel-body">
+
+
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
+												<div class="col-lg-3">
+													<input class="form-control" type="hidden" id="id_act_idA" name="idUsuario" maxlength="8"  />
+												</div></div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label" for="id_act_nombresA">Nombres</label>
 												<div class="col-lg-8">
-													<input class="form-control" id="id_reg_nombresA" name="nombres" placeholder="Ingrese el nombre" type="text" maxlength="20"/>
+													<input class="form-control" id="id_act_nombresA" name="nombre" placeholder="Ingrese el nombre" type="text" maxlength="20"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+												<label class="col-lg-3 control-label" for="id_act_apellidoA">Apellidos</label>
 												<div class="col-lg-8">
-													<input class="form-control" id="id_reg_apellidosA" name="apellidos" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
+													<input class="form-control" id="id_act_apellidoA" name="apellido" placeholder="Ingrese el apellido" type="text" maxlength="20"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_dni">DNI</label>
+												<label class="col-lg-3 control-label" for="id_act_dniA">DNI</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_dniA" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8"/>
+													<input class="form-control" type="text" id="id_act_dniA" name="dni" onkeypress="return soloNumeros(event)" placeholder="Ingrese su DNI" maxlength="8" readonly/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_login">Usuario</label>
+												<label class="col-lg-3 control-label" for="id_act_passwordA">Contraseña</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_loginA" name="login"  placeholder="Ingrese su nombre de usuario"/>
+													<input class="form-control" type="text" id="id_act_passwordA" name="password"  placeholder="Ingrese su Contraseña"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_password">Contraseña</label>
+												<label class="col-lg-3 control-label" for="id_act_correoA">Correo</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_passwordA" name="password"  placeholder="Ingrese su Contraseña"/>
+													<input class="form-control" type="text" id="id_act_correoA" name="email"  placeholder="Ingrese su correo"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_correo">Correo</label>
+												<label class="col-lg-3 control-label" for="id_act_celularA">Celular</label>
 												<div class="col-lg-3">
-													<input class="form-control" type="text" id="id_reg_correoA" name="correo"  placeholder="Ingrese su correo"/>
+													<input class="form-control" type="text" id="id_act_celularA" name="celular" onkeypress="return soloNumeros(event)" placeholder="Ingrese su Celular" maxlength="9"/>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-3 control-label" for="id_reg_fecha_nacimiento">Fecha Nacimiento</label>
-												<div class="col-lg-3">
-													<input class="form-control" id="id_reg_fecha_nacimientoA" name="fechaNacimiento" type="date"/>
-												</div>
-											</div>
+												<input type="hidden" id="id_act_usureg" name="usureg" value=${sessionScope.objUsuario.idUsuario}></div>
+
+
+
 
 
 											<div class="form-group">
@@ -221,9 +223,10 @@
 											</div>
 										</div>
 									</div>
+									</div>
 								</div>
-
 							</div>
+						</div>
 					</form>
 
 				</div>
@@ -251,14 +254,12 @@
 		return (key >= 48 && key <= 57);
 	}
 	function limpiarFormulario(){
-		$("#id_nombre").val(' ');
-		$("#id_apellido").val(' ');
+		$("#id_act_nombresA").val(' ');
+		$("#id_act_apellidoA").val(' ');
 		$("#id_telefono").val(' ');
-		$("#id_dni").val(' ');
-		$("#id_correo").val(' ');
-		$("#id_fecha").val(' ');
-		$("#id_modalidad").val('');
-		$("#id_pais").val(' ');
+		$("#id_act_passwordA").val(' ');
+		$("#id_act_correoA").val(' ');
+		$("#id_act_celularA").val(' ');
 	}
 	function agregarGrilla(lista){
 		$('#id_table').DataTable().clear();
@@ -273,12 +274,13 @@
 			columns:[
 				{data: "idUsuario"},
 				{data: "nombre"},
-				{data: "apellidos"},
+				{data: "apellido"},
+				{data: "dni"},
 				{data: "password"},
-				{data: "correo"},
+				{data: "email"},
 				{data: "celular"},
 				{data: function(row, type, val, meta){
-						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+row.idUsuario + '\',\'' + row.nombres +'\',\'' + row.password  +'\',\'' + row.correo + row.celular + '\')">Editar</button>';
+						var salida='<button type="button" style="width: 90px" class="btn btn-info btn-sm" onclick="editar(\''+ row.idUsuario +'\',\''+row.nombre + '\',\'' + row.apellido +'\',\'' + row.password  +'\',\'' + row.dni + '\',\'' + row.email+ '\',\'' + row.celular + '\')">Editar</button>';
 						return salida;
 					},className:'text-center'},
 
@@ -288,7 +290,8 @@
 	//boton filtro
 	$("#id_btn_filtrar").click(function(){
 		var fil=$("#id_txt_filtro").val();
-		$.getJSON("consultaCrudPrestatario",{"filtro":fil}, function (lista){
+		var usureg=$("#id_txt_usureg").val();
+		$.getJSON("consultaCrudPrestatario",{"filtro":fil,"usureg":usureg}, function (lista){
 			agregarGrilla(lista);
 		});
 	});
@@ -325,7 +328,7 @@
 		if (validator.isValid()) {
 			$.ajax({
 				type: "POST",
-				url: "registraCrudPrestatario",
+				url: "actualizaCrudPrestatario",
 				data: $('#id_form_actualiza').serialize(),
 				success: function(data){
 					agregarGrilla(data.lista);
@@ -355,15 +358,14 @@
 			}
 		});
 	}
-	function editar(id,nombres,apellidos,telefono,correo,fechaNacimiento,pais,modalidad){
-		$('#id_ID').val(id);
-		$('#id_act_nombres').val(nombres);
-		$('#id_act_apellidos').val(apellidos);
-		$('#id_act_telefono').val(telefono);
-		$('#id_act_correo').val(correo);
-		$('#id_act_fecha_nacimiento').val(fechaNacimiento);
-		$('#id_act_pais').val(pais);
-		$('#id_act_grado').val(modalidad);
+	function editar(idUsuario,nombre,apellido,password,dni,email,celular){
+		$('#id_act_idA').val(idUsuario);
+		$('#id_act_nombresA').val(nombre);
+		$('#id_act_apellidoA').val(apellido);
+		$('#id_act_passwordA').val(password);
+		$('#id_act_celularA').val(celular);
+		$('#id_act_dniA').val(dni);
+		$('#id_act_correoA').val(email);
 		$('#id_div_modal_actualiza').modal("show");
 	}
 

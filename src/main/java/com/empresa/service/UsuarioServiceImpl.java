@@ -58,8 +58,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public List<Usuario> listaPrestatarioLike(String nombre) {
-		return repository.listaPrestatariosLike(nombre);
+	public List<Usuario> listaPrestatarioLike(String nombre, int usureg) {
+		return repository.listaPrestatariosLike(nombre, usureg);
 	}
 
 }
