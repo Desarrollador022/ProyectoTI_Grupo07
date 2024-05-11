@@ -2,8 +2,8 @@
 
 
 
-<div class="container">
- <div class="navbar navbar-inverse navbar-fixed-top" >
+<div class="container" >
+ <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: white" >
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,19 +13,19 @@
       </button>
     </div>
 
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" >
 		<ul class="nav navbar-nav navbar-left">
-			<li><a href="verIntranetHome"><img src="images/cabeceraLogo.jpg" alt="Inicio"></a></li>
+			<li><a href="verIntranetHome"><img src="images/logoCab.png" alt="Inicio"></a></li>
 		</ul>
 
 
-		<ul class="nav navbar-nav">
+		<ul class="nav navbar-nav" >
     	<c:if test="${ !empty sessionScope.objMenusTipo1}">
 	    	<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" STYLE="color: black; margin-top: 24%">
 		           Cruds<b class="caret"></b>
 		        </a>
-		        <ul class="dropdown-menu">
+		        <ul class="dropdown-menu" style="color: black">
 		        	<c:forEach var="x" items="${sessionScope.objMenusTipo1}">
 						<li>
 		        			<a href="${x.ruta}"> ${x.nombre} </a>
@@ -37,10 +37,10 @@
 
      	<c:if test="${ !empty sessionScope.objMenusTipo3}">
 	    	<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" STYLE="color: black; margin-top: 24%">
 		           CRUD (PC2)<b class="caret"></b>
 		        </a>
-		        <ul class="dropdown-menu">
+		        <ul class="dropdown-menu" STYLE="color: black; margin-top: 24%">
 		        	<c:forEach var="x" items="${sessionScope.objMenusTipo3}">
 						<li>
 		        			<a href="${x.ruta}"> ${x.nombre} </a>
@@ -51,8 +51,8 @@
      	</c:if>
 
       	<c:if test="${ !empty sessionScope.objMenusTipo2}">
-	    	<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	    	<li class="dropdown" STYLE="color: black">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" STYLE="color: black; margin-top: 24%">
 		           Consulta y Reporte (PC3)<b class="caret"></b>
 		        </a>
 		        <ul class="dropdown-menu">
@@ -66,11 +66,11 @@
      	</c:if>
 
      	<c:if test="${ !empty sessionScope.objMenusTipo4}">
-	    	<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	    	<li class="dropdown" STYLE="color: black">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" STYLE="color: black; margin-top: 24%">
 		          Transacciones (AP)<b class="caret"></b>
 		        </a>
-		        <ul class="dropdown-menu">
+		        <ul class="dropdown-menu" STYLE="color: black">
 		        	<c:forEach var="x" items="${sessionScope.objMenusTipo4}">
 						<li>
 		        			<a href="${x.ruta}"> ${x.nombre} </a>
@@ -83,7 +83,7 @@
      </ul>
 
      <ul class="nav navbar-nav navbar-right">
-       	<li><a href="logout">Salir</a></li>
+       	<li><a href="logout" STYLE="color: black; margin-top: 24%">Salir</a></li>
      </ul>
 
     </div>
