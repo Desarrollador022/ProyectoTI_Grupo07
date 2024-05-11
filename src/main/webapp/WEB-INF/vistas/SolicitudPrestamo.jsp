@@ -20,13 +20,14 @@
 
     <title>Intranet</title>
 </head>
-<body>
+<body style="background-color: #2a3042">
 <jsp:include page="intranetCabecera.jsp" />
 
 <div class="container" style="margin-top: 200px">
-<table class="table table-responsive" id="mitabla">
+  <table class="table table-responsive" id="mitabla">
     <thead>
-    <tr>
+    <h3 STYLE="color: white; text-align: left">CREACION DE PRESTAMO</h3>
+    <tr style="color: white">
         <th scope="col">Duracion</th>
         <th scope="col" style="text-align: center">S/.150</th>
         <th scope="col" style="text-align: center">S/.200</th>
@@ -37,7 +38,7 @@
     </thead>
     <tbody>
     <tr>
-        <th scope="row">15 dias</th>
+        <th scope="row" style="color: white">15 dias</th>
         <td><button type="button" class="btn btn-light" >S/.154.11</button></td>
         <td><button type="button" class="btn btn-light" >S/.205.49</button></td>
         <td><button type="button" class="btn btn-light">S/.308.23</button></td>
@@ -45,7 +46,7 @@
         <td><button type="button" class="btn btn-light">S/.513.72</button></td>
     </tr>
     <tr>
-        <th scope="row">20 dias</th>
+        <th scope="row" style="color: white">20 dias</th>
         <td><button type="button" class="btn btn-light" onclick="mostrarContenido()">S/.155.49</button></td>
         <td><button type="button" class="btn btn-light">S/.207.32</button></td>
         <td><button type="button" class="btn btn-light">S/.310.98</button></td>
@@ -53,7 +54,7 @@
         <td><button type="button" class="btn btn-light">S/.518.30</button></td>
     </tr>
     <tr>
-        <th scope="row">25 dias</th>
+        <th scope="row" style="color: white">25 dias</th>
         <td><button type="button" class="btn btn-light">S/.156.86</button></td>
         <td><button type="button" class="btn btn-light">S/.209.15</button></td>
         <td><button type="button" class="btn btn-light">S/.313.72</button></td>
@@ -61,7 +62,7 @@
         <td><button type="button" class="btn btn-light">S/.522.88</button></td>
     </tr>
     <tr>
-        <th scope="row">30 dias</th>
+        <th scope="row" style="color: white">30 dias</th>
         <td><button type="button" class="btn btn-light">S/.157.23</button></td>
         <td><button type="button" class="btn btn-light">S/.210.98</button></td>
         <td><button type="button" class="btn btn-light">S/.316.47</button></td>
@@ -69,7 +70,7 @@
         <td><button type="button" class="btn btn-light">S/.527.48</button></td>
     </tr>
     <tr>
-        <th scope="row">35 dias</th>
+        <th scope="row" style="color: white">35 dias</th>
         <td><button type="button" class="btn btn-light">S/.159.61</button></td>
         <td><button type="button" class="btn btn-light">S/.212.81</button></td>
         <td><button type="button" class="btn btn-light">S/.319.22</button></td>
