@@ -82,24 +82,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade" id="id_div_modal_solicita" >
     <div class="modal-dialog" style="width: 60%">
 
