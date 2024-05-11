@@ -23,7 +23,7 @@
     <title>Sistema Prestamos</title>
 </head>
 
-<body>
+<body style="background-color:#2a3042">
 
 <div class="container-fluid">
     <div class="container">
