@@ -117,7 +117,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label" for="id_reg_monto">Monto</label>
                         <div class="col-lg-8">
-                            <input class="form-control" id="id_reg_monto" name="monto" placeholder="Ingrese el monto" type="text" maxlength="20"/>
+                            <input class="form-control" id="id_reg_monto" name="monto" placeholder="Ingrese el monto" type="text" maxlength="20" READONLY/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -141,7 +141,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label" for="id_reg_pagoDiario">Dias</label>
+                        <label class="col-lg-3 control-label" for="id_reg_pagoDiario">PagoDiario</label>
                         <div class="col-lg-3">
                             <input class="form-control" type="text" id="id_reg_pagoDiario" name="pagoDiario" readonly="readonly"  />
                         </div>
@@ -167,8 +167,44 @@
 
 
 <script type="text/javascript">
+    <!--FECHA Y MONTO-->
+    document.getElementById('id_reg_fechaInicio').addEventListener('change', function() {
+        var fechaInicio = new Date(this.value);
+        var dias= parseInt(($("#id_reg_dias").val()).match(/^\d+/)[0]);
+        fechaInicio.setDate(fechaInicio.getDate() + dias);
+        var fechaFin = fechaInicio.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        document.getElementById('id_reg_fechaFin').value = fechaFin;
+        calculaPago();
+    });
+
+
+        function calculaPago() {
+        var montoTexto = document.getElementById('id_reg_monto').value;
+            var matches = montoTexto.match(/\d+\.\d+/);
+            var monto = matches ? parseFloat(matches[0]) : 0;
+            var fechaInicio = new Date(document.getElementById('id_reg_fechaInicio').value);
+        var fechaFin = new Date(document.getElementById('id_reg_fechaFin').value);
+
+        var dLaborales = 0;
+        while (fechaInicio<=fechaFin) {
+            if (fechaInicio.getDay() !== 0 && fechaInicio.getDay() !== 6) {
+                dLaborales++;
+            }
+            fechaInicio.setDate(fechaInicio.getDate() + 1); // Avanzar un día completo
+
+
+            // Calcular interés
+            var montoConInteres = monto * 1.1; // 10% de interés
+            // Calcular pago diario
+            var pagoDiario = montoConInteres / dLaborales;
+
+            $('#id_reg_pagoDiario').val(pagoDiario.toFixed(2));
+        }
+    }
+
+
+    <!--ABRIR MODAL-->
     function mostrarContenido() {
-        // Obtener el elemento <tr> más cercano al botón
         var tr = this.closest('tr');
 
         if (tr) {
@@ -177,7 +213,6 @@
 
             var buttonCellIndex = this.parentNode.cellIndex;
 
-            // Obtener el contenido del <td> correspondiente al índice de columna del botón
             var tdContent = tr.querySelectorAll('td')[buttonCellIndex-1].innerText;
 
             $('#id_reg_monto').val(tdContent);
@@ -190,13 +225,13 @@
         }
     }
 
-    // Agregar evento de clic a todos los botones dentro de la tabla
+
     document.querySelectorAll('#mitabla button').forEach(function(button) {
         button.addEventListener('click', mostrarContenido);
     });
-    <!-- Agregar aqu� -->
 
 
+<!--REGISTRAR-->
     $("#id_registrar").click(function (){
         var validator = $('#id_form').data('bootstrapValidator');
         validator.validate();
@@ -329,38 +364,7 @@
 
 </script>
 
-<script>
-    document.getElementById('id_reg_fechaInicio').addEventListener('change', function() {
-        var fechaInicio = new Date(this.value);
-        fechaInicio.setDate(fechaInicio.getDate() + 30);
-        var fechaFin = fechaInicio.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-        document.getElementById('id_reg_fechaFin').value = fechaFin;
-    });
 
-
-    document.getElementById('id_reg_monto').addEventListener('change', function() {
-        var monto = parseFloat(document.getElementById('id_reg_monto').value);
-        var fechaInicio = new Date(document.getElementById('id_reg_fechaInicio').value);
-        var fechaFin = new Date(document.getElementById('id_reg_fechaFin').value);
-        var dias = parseInt(document.getElementById('id_reg_dias').value);
-
-        // Calcular interés
-        var montoConInteres = monto * 1.1; // 10% de interés
-
-        // Calcular cantidad de cuotas
-        var cuotas = 30;
-
-        // Calcular pago diario
-        var pagoDiario = montoConInteres / cuotas;
-
-
-
-
-
-
-        document.getElementById('id_reg_pagoDiario').value = pagoDiario.toFixed(2);
-    });
-</script>
 </body>
 </html>
 
