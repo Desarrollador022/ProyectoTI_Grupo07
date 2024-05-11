@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
-
+    <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrapValidator.css"/>
@@ -22,6 +22,89 @@
 </head>
 <body>
 <jsp:include page="intranetCabecera.jsp" />
+
+<div class="container" style="margin-top: 200px">
+<table class="table table-responsive" id="mitabla">
+    <thead>
+    <tr>
+        <th scope="col">Duracion</th>
+        <th scope="col" style="text-align: center">S/.150</th>
+        <th scope="col" style="text-align: center">S/.200</th>
+        <th scope="col" style="text-align: center">S/.300</th>
+        <th scope="col" style="text-align: center">S/.400</th>
+        <th scope="col" style="text-align: center">S/.500</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">15 dias</th>
+        <td><button type="button" class="btn btn-light" >S/.154.11</button></td>
+        <td><button type="button" class="btn btn-light" >S/.205.49</button></td>
+        <td><button type="button" class="btn btn-light">S/.308.23</button></td>
+        <td><button type="button" class="btn btn-light">S/.410.98</button></td>
+        <td><button type="button" class="btn btn-light">S/.513.72</button></td>
+    </tr>
+    <tr>
+        <th scope="row">20 dias</th>
+        <td><button type="button" class="btn btn-light" onclick="mostrarContenido()">S/.155.49</button></td>
+        <td><button type="button" class="btn btn-light">S/.207.32</button></td>
+        <td><button type="button" class="btn btn-light">S/.310.98</button></td>
+        <td><button type="button" class="btn btn-light">S/.414.64</button></td>
+        <td><button type="button" class="btn btn-light">S/.518.30</button></td>
+    </tr>
+    <tr>
+        <th scope="row">25 dias</th>
+        <td><button type="button" class="btn btn-light">S/.156.86</button></td>
+        <td><button type="button" class="btn btn-light">S/.209.15</button></td>
+        <td><button type="button" class="btn btn-light">S/.313.72</button></td>
+        <td><button type="button" class="btn btn-light">S/.414.64</button></td>
+        <td><button type="button" class="btn btn-light">S/.522.88</button></td>
+    </tr>
+    <tr>
+        <th scope="row">30 dias</th>
+        <td><button type="button" class="btn btn-light">S/.157.23</button></td>
+        <td><button type="button" class="btn btn-light">S/.210.98</button></td>
+        <td><button type="button" class="btn btn-light">S/.316.47</button></td>
+        <td><button type="button" class="btn btn-light">S/.421.98</button></td>
+        <td><button type="button" class="btn btn-light">S/.527.48</button></td>
+    </tr>
+    <tr>
+        <th scope="row">35 dias</th>
+        <td><button type="button" class="btn btn-light">S/.159.61</button></td>
+        <td><button type="button" class="btn btn-light">S/.212.81</button></td>
+        <td><button type="button" class="btn btn-light">S/.319.22</button></td>
+        <td><button type="button" class="btn btn-light">S/.425.62</button></td>
+        <td><button type="button" class="btn btn-light">S/.532.03</button></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="id_div_modal_solicita" >
+    <div class="modal-dialog" style="width: 60%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 35px 50px">
 <div class="container" style="margin-top: 4%"><h4>Registro Prestamo</h4></div>
 
 <div class="container" style="margin-top: 1%">
@@ -30,11 +113,11 @@
         <div class="col-md-12" style="margin-top: 2%">
             <div class="row">
                 <div class="form-group">
-
+                    <div class="panel-body">
                     <div class="form-group">
                         <label class="col-lg-3 control-label" for="id_reg_monto">Monto</label>
                         <div class="col-lg-8">
-                            <input class="form-control" id="id_reg_monto" name="monto" placeholder="Ingrese el monto" type="text" maxlength="20"/>
+                            <input class="form-control" id="id_reg_monto" name="monto" placeholder="Ingrese el monto" type="text" maxlength="20" READONLY/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -58,7 +141,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label" for="id_reg_pagoDiario">Dias</label>
+                        <label class="col-lg-3 control-label" for="id_reg_pagoDiario">PagoDiario</label>
                         <div class="col-lg-3">
                             <input class="form-control" type="text" id="id_reg_pagoDiario" name="pagoDiario" readonly="readonly"  />
                         </div>
@@ -71,16 +154,84 @@
                 </div>
             </div>
         </div>
+        </div>
+
     </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
 
 <script type="text/javascript">
-    <!-- Agregar aqu� -->
+    <!--FECHA Y MONTO-->
+    document.getElementById('id_reg_fechaInicio').addEventListener('change', function() {
+        var fechaInicio = new Date(this.value);
+        var dias= parseInt(($("#id_reg_dias").val()).match(/^\d+/)[0]);
+        fechaInicio.setDate(fechaInicio.getDate() + dias);
+        var fechaFin = fechaInicio.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        document.getElementById('id_reg_fechaFin').value = fechaFin;
+        calculaPago();
+    });
 
 
+        function calculaPago() {
+        var montoTexto = document.getElementById('id_reg_monto').value;
+            var matches = montoTexto.match(/\d+\.\d+/);
+            var monto = matches ? parseFloat(matches[0]) : 0;
+            var fechaInicio = new Date(document.getElementById('id_reg_fechaInicio').value);
+        var fechaFin = new Date(document.getElementById('id_reg_fechaFin').value);
+
+        var dLaborales = 0;
+        while (fechaInicio<=fechaFin) {
+            if (fechaInicio.getDay() !== 0 && fechaInicio.getDay() !== 6) {
+                dLaborales++;
+            }
+            fechaInicio.setDate(fechaInicio.getDate() + 1); // Avanzar un día completo
+
+
+            // Calcular interés
+            var montoConInteres = monto * 1.1; // 10% de interés
+            // Calcular pago diario
+            var pagoDiario = montoConInteres / dLaborales;
+
+            $('#id_reg_pagoDiario').val(pagoDiario.toFixed(2));
+        }
+    }
+
+
+    <!--ABRIR MODAL-->
+    function mostrarContenido() {
+        var tr = this.closest('tr');
+
+        if (tr) {
+            // Obtener el contenido del <th> dentro del <tr>
+            var thContent = tr.querySelector('th').innerText;
+
+            var buttonCellIndex = this.parentNode.cellIndex;
+
+            var tdContent = tr.querySelectorAll('td')[buttonCellIndex-1].innerText;
+
+            $('#id_reg_monto').val(tdContent);
+            $('#id_reg_dias').val(thContent);
+            $('#id_div_modal_solicita').modal("show");
+
+
+        } else {
+            console.error("No se pudo encontrar el elemento <tr>.");
+        }
+    }
+
+
+    document.querySelectorAll('#mitabla button').forEach(function(button) {
+        button.addEventListener('click', mostrarContenido);
+    });
+
+
+<!--REGISTRAR-->
     $("#id_registrar").click(function (){
         var validator = $('#id_form').data('bootstrapValidator');
         validator.validate();
@@ -91,7 +242,7 @@
                 url: "registraSolicitudPrestamo",
                 data: $('#id_form').serialize(),
                 success: function(data){
-                    mostrarMensaje(data.MENSAJE);
+                    mostrarMensaje(data.mensaje);
                     validator.resetForm();
                     limpiarFormulario();
                 },
@@ -163,7 +314,7 @@
                         message: 'El DNI es requerido'
                     },
                     regexp: {
-                        regexp: /^[0-8]{8}$/,
+                        regexp: /^[0-9]{8}$/,
                         message: 'El DNI debe tener 8 d�gitos'
                     }
                 }
@@ -213,38 +364,7 @@
 
 </script>
 
-<script>
-    document.getElementById('id_reg_fechaInicio').addEventListener('change', function() {
-        var fechaInicio = new Date(this.value);
-        fechaInicio.setDate(fechaInicio.getDate() + 30);
-        var fechaFin = fechaInicio.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-        document.getElementById('id_reg_fechaFin').value = fechaFin;
-    });
 
-
-    document.getElementById('id_reg_monto').addEventListener('change', function() {
-        var monto = parseFloat(document.getElementById('id_reg_monto').value);
-        var fechaInicio = new Date(document.getElementById('id_reg_fechaInicio').value);
-        var fechaFin = new Date(document.getElementById('id_reg_fechaFin').value);
-        var dias = parseInt(document.getElementById('id_reg_dias').value);
-
-        // Calcular interés
-        var montoConInteres = monto * 1.1; // 10% de interés
-
-        // Calcular cantidad de cuotas
-        var cuotas = 30;
-
-        // Calcular pago diario
-        var pagoDiario = montoConInteres / cuotas;
-
-
-
-
-
-
-        document.getElementById('id_reg_pagoDiario').value = pagoDiario.toFixed(2);
-    });
-</script>
 </body>
 </html>
 

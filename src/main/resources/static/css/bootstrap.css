@@ -4165,94 +4165,20 @@ border-bottom-left-radius
 }
 
 .btn-group-vertical
->
-.btn
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-){
-border-radius
-:
- 
-0
-}
-.btn-group-vertical
->
-.btn
-:first-child
-:not
- 
-(
-:last-child
- 
-){
-border-top-left-radius
-:
- 
-4
-px
-;
+>.btn:not(:first-child):not(:last-child)
+{border-radius:0}
+.btn-group-vertical>.btn:first-child:not(:last-child ) {
+border-top-left-radius:4px;
+border-top-right-radius:4px;
+border-bottom-right-radius:0;
+border-bottom-left-radius:0}
+.btn-group-vertical>.btn:last-child:not(:first-child){
 
-	
-border-top-right-radius
-:
- 
-4
-px
-;
+border-top-left-radius: 0;
+border-top-right-radius:0;
+border-bottom-right-radius:4px;
+border-bottom-left-radius:4px}
 
-	
-border-bottom-right-radius
-:
- 
-0;
-border-bottom-left-radius
-:
- 
-0
-}
-.btn-group-vertical
->
-.btn
-:last-child
-:not
- 
-(
-:first-child
- 
-){
-border-top-left-radius
-:
- 
-0;
-border-top-right-radius
-:
- 
-0;
-border-bottom-right-radius
-:
- 
-4
-px
-;
-
-	
-border-bottom-left-radius
-:
- 
-4
-px
-
-
-}
 .btn-group-vertical>.btn-group:not (:first-child ):not (:last-child )>.btn
 	{
 	border-radius: 0
@@ -4372,52 +4298,10 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	display: table-cell
 }
 
-.input-group
- 
-.form-control
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-),
-.input-group-addon
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-),
-.input-group-btn
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-){
-border-radius
-:
- 
-0
-}
+.input-group.form-control:not(:first-child):not(:last-child),
+.input-group-addon:not(:first-child):not(:last-child),
+.input-group-btn:not(:first-child):not(:last-child){
+border-radius:0}
 .input-group-addon, .input-group-btn {
 	width: 1%;
 	white-space: nowrap;
@@ -5817,8 +5701,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 	color: #843534
 }
 
-@
--webkit-keyframes progress-bar-stripes {
+@-webkit-keyframes progress-bar-stripes {
 	from {background-position: 40px 0
 }
 
@@ -5827,8 +5710,7 @@ to {
 }
 
 }
-@
--o-keyframes progress-bar-stripes {
+@-o-keyframes progress-bar-stripes {
 	from {background-position: 40px 0
 }
 
@@ -5837,8 +5719,7 @@ to {
 }
 
 }
-@
-keyframes progress-bar-stripes {
+@keyframes progress-bar-stripes {
 	from {background-position: 40px 0
 }
 
@@ -7420,7 +7301,6 @@ button.close {
 }
 
 .text-hide {
-	font: 0/0 a;
 	color: transparent;
 	text-shadow: none;
 	background-color: transparent;
@@ -7435,10 +7315,7 @@ button.close {
 	position: fixed
 }
 
-@
--ms-viewport {
-	width: device-width
-}
+
 
 .visible-lg, .visible-md, .visible-sm, .visible-xs {
 	display: none !important
@@ -7667,6 +7544,21 @@ button.close {
 	color: white !important;
 	text-align: center;
 	font-size: 15px;
+}
+.divider:after,
+.divider:before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #eee;
+}
+.h-custom {
+	height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+	.h-custom {
+		height: 100%;
+	}
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
