@@ -22,9 +22,9 @@
 	<link rel="stylesheet" href="css/bootstrapValidator.css"/>
 	<title></title>
 </head>
-<body>
+<body style="background-color: #2a3042">
 <jsp:include page="intranetCabecera.jsp" />
-<div class="container" style="margin-top: 4%"><h4>CRUD Prestamista</h4></div>
+<div class="container" style="margin-top: 8%; color: white"><h4>CRUD Prestamista</h4></div>
 
 <div class="container" style="margin-top: 1%">
 	<!-- Agregar aqu� -->
@@ -43,7 +43,7 @@
 				<button type="button" data-toggle='modal'  data-target="#id_div_modal_registra"  class='btn btn-success' style="width: 150px">REGISTRA</button>
 			</div>
 		</div>
-		<div class="row" >
+		<div class="row" style="background-color: #2a3042; color: #ced4da;">
 			<div class="col-md-12">
 				<div class="content" >
 
@@ -60,7 +60,7 @@
 							<th style="width: 10%">Actualizar</th>
 						</tr>
 						</thead>
-						<tbody>
+						<tbody style="color: #000000">
 						</tbody>
 					</table>
 				</div>
