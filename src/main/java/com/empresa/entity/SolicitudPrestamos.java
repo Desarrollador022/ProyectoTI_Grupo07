@@ -43,9 +43,11 @@ public class SolicitudPrestamos {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
     private Date fechaFin;
     private int dias;
-    private double pagodiario;
-    private int estado;
+    private String pagodiario;
+    private int montoprest;
     private int usureg;
+    private String interes;
+    private int prestamistareg;
 
 
 

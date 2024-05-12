@@ -14,7 +14,7 @@ import com.empresa.entity.Zona;
 public interface SolicitudPrestamoRepository extends JpaRepository<SolicitudPrestamos, Integer>{
 
 
-    @Query("select x from SolicitudPrestamos x where x.idSolicitudPrestamos = ?1")
-    public List<SolicitudPrestamos> BuscaNombreLike(int id);
+    @Query("select s from SolicitudPrestamos s where s.usureg = ?1 and s.prestamistareg=?2")
+    public List<SolicitudPrestamos> BuscaNombreLike(int idusu ,int idprest);
 
 }
