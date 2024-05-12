@@ -115,11 +115,13 @@
                 <div class="form-group">
                     <div class="panel-body">
                     <div class="form-group">
+
                         <label class="col-lg-3 control-label" for="id_reg_monto">Monto</label>
                         <div class="col-lg-8">
                             <input class="form-control" id="id_reg_monto" name="monto" placeholder="Ingrese el monto" type="text" maxlength="20" READONLY/>
                         </div>
                     </div>
+                        <input class="form-control" type="hidden"  id="id_reg_montoprest" name="montoPrest">
                     <div class="form-group">
                         <label class="col-lg-3 control-label" for="id_reg_fechaInicio">Fecha de Inicio</label>
                         <div class="col-lg-3">
@@ -167,7 +169,7 @@
 
 
 <script type="text/javascript">
-    <!--FECHA Y MONTO-->
+    <!--FECHAYMONTO-->
     document.getElementById('id_reg_fechaInicio').addEventListener('change', function() {
         var fechaInicio = new Date(this.value);
         var dias= parseInt(($("#id_reg_dias").val()).match(/^\d+/)[0]);
@@ -199,6 +201,7 @@
             var pagoDiario = montoConInteres / dLaborales;
 
             $('#id_reg_pagoDiario').val(pagoDiario.toFixed(2));
+            $('#id_reg_monto').val(monto);
         }
     }
 
@@ -210,13 +213,17 @@
         if (tr) {
             // Obtener el contenido del <th> dentro del <tr>
             var thContent = tr.querySelector('th').innerText;
-
+            var dias=parseInt(thContent.match(/\d+/)[0]);
             var buttonCellIndex = this.parentNode.cellIndex;
 
-            var tdContent = tr.querySelectorAll('td')[buttonCellIndex-1].innerText;
+            var tdContent = tr.querySelectorAll('td')[buttonCellIndex-1].innerText
+            var thColumnContent = tr.closest('table').querySelectorAll('th')[buttonCellIndex].innerText;
+            var montoprest = parseInt(thColumnContent.replace(/\D/g, ''), 10);
+
 
             $('#id_reg_monto').val(tdContent);
-            $('#id_reg_dias').val(thContent);
+            $('#id_reg_dias').val(dias);
+            $('#id_reg_montoprest').val(montoprest);
             $('#id_div_modal_solicita').modal("show");
 
 
@@ -224,6 +231,8 @@
             console.error("No se pudo encontrar el elemento <tr>.");
         }
     }
+
+
 
 
     document.querySelectorAll('#mitabla button').forEach(function(button) {

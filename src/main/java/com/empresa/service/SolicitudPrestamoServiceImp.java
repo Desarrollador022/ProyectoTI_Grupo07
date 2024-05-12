@@ -28,9 +28,9 @@ public class SolicitudPrestamoServiceImp implements SolicitudPrestamoService {
 
 
     @Override
-    public List<SolicitudPrestamos> BuscaNombreLike(int nombres) {
+    public List<SolicitudPrestamos> BuscaNombreLike(int usu,int idPrest) {
 
-        return repository.BuscaNombreLike(nombres);
+        return repository.BuscaNombreLike(usu,idPrest);
     }
 
 

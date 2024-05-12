@@ -35,6 +35,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
 	@Query("select u from Usuario u, UsuarioHasRol r where u.idUsuario = r.usuario.idUsuario and r.rol.idRol = 4 and u.nombre like ?1 and u.usureg=?2")
 	public List<Usuario> listaPrestatariosLike(String nombre, int usureg);
+	@Query("select u.idUsuario,u.nombre,u.apellido prestatrio from Usuario u, UsuarioHasRol r where u.idUsuario = r.usuario.idUsuario and r.rol.idRol = 4 and u.nombre like ?1 and u.usureg=?2")
+	public List<Usuario> listaPrestatariosNombre(int usureg);
 	
 	
 }

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.empresa.entity.SolicitudPrestamos;
-import com.empresa.service.SolicitudPrestamoService;
+import com.empresa.entity.*;
+import com.empresa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -19,13 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import com.empresa.entity.Usuario;
-import com.empresa.entity.UsuarioHasRol;
-import com.empresa.entity.UsuarioHasRolPK;
-import com.empresa.service.UsuarioHasRolService;
-import com.empresa.service.UsuarioService;
-import com.empresa.service.ZonaService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,6 +32,8 @@ public class SolicitudPrestamoController {
 
         @Autowired
         private SolicitudPrestamoService solicitudPrestamoService;
+        @Autowired
+        private SolicitudHasEstadoService solicitudHasPrestamoService;
 
 
         @Autowired
@@ -47,10 +42,9 @@ public class SolicitudPrestamoController {
 
         @GetMapping("/consultaCrudSolicitudPrestamo")
         @ResponseBody
-        public List<SolicitudPrestamos> consulta(HttpSession session) {
-
-            Usuario objUsuario = (Usuario) session.getAttribute("objUsuario");
-            return solicitudPrestamoService.BuscaNombreLike(objUsuario.getIdUsuario());
+        public List<SolicitudPrestamos> listaJefes(int filtro, int usureg){
+            List<SolicitudPrestamos> lstSalida = solicitudPrestamoService.BuscaNombreLike(filtro,usureg);
+            return lstSalida;
         }
 
 
@@ -62,7 +56,8 @@ public class SolicitudPrestamoController {
                 @RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
                 @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
                 @RequestParam("dias") int dias,
-                @RequestParam("pagoDiario") double pagoDiario,
+                @RequestParam("montoPrest") int montoprest,
+                @RequestParam("pagoDiario") String pagoDiario,
                 RedirectAttributes redirectAttributes, HttpServletRequest request, HttpSession session
         ) {
 
@@ -75,13 +70,23 @@ public class SolicitudPrestamoController {
             s.setFechaFin(fechaFin);
             s.setDias(dias);
             s.setPagodiario(pagoDiario);
+            s.setMontoprest(montoprest);
             s.setUsureg(objUsuario.getIdUsuario());
-            s.setEstado(2);
+            s.setPrestamistareg(objUsuario.getUsureg());
+            s.setInteres("10%");
+            solicitudPrestamoService.insertaSolicitudPrestamo(s);
+            Solicitud_has_EstadoPK pk = new Solicitud_has_EstadoPK();
+            pk.setIdSolicitudPrestamos(s.getIdSolicitudPrestamos());
+            pk.setIdEstadoSoli(2);
+
+            Solicitud_has_Estado soliobj = new Solicitud_has_Estado();
+            soliobj.setSolicitudHasRolPk(pk);
+            Solicitud_has_Estado objsalida = solicitudHasPrestamoService.inserta(soliobj);
 
 
-            SolicitudPrestamos objSalida = solicitudPrestamoService.insertaSolicitudPrestamo(s);
+
             HashMap<String, Object> map = new HashMap<String, Object>();
-            if (objSalida == null) {
+            if (objsalida == null) {
                 map.put("mensaje", "Error en el registro");
             } else {
 
@@ -99,36 +104,36 @@ public class SolicitudPrestamoController {
         @PostMapping("/actualizaSolicitudPrestamos")
         @ResponseBody
         public Map<?, ?> actualiza(
-                @RequestParam("idSolicitudPrestamo") int idSolicitudPrestamo,
-                @RequestParam("monto") double monto,
-                @RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
-                @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
-                @RequestParam("dias") int dias,
-                @RequestParam("pagoDiario") double pagoDiario,
+                @RequestParam("soli") int idSolicitudPrestamo,
+
                 RedirectAttributes redirectAttributes, HttpSession session
         ) {
             HashMap<String, Object> map = new HashMap<String, Object>();
 
 
-            Usuario objUsuario = (Usuario) session.getAttribute("objUsuario");
 
 
-            SolicitudPrestamos s = new SolicitudPrestamos();
-            s.setIdSolicitudPrestamos(idSolicitudPrestamo);
-            s.setMonto(monto);
-            s.setFechaInicio(fechaInicio);
-            s.setFechaFin(fechaFin);
-            s.setDias(dias);
-            s.setPagodiario(pagoDiario);
-            s.setEstado(1);
+            Solicitud_has_EstadoPK pk = new Solicitud_has_EstadoPK();
+            pk.setIdSolicitudPrestamos(idSolicitudPrestamo);
+            pk.setIdEstadoSoli(2);
 
-            SolicitudPrestamos objSalida = solicitudPrestamoService.actualizaSolicitudPrestamo(s);
-            if (objSalida == null) {
+            Solicitud_has_Estado soliobj = new Solicitud_has_Estado();
+            soliobj.setSolicitudHasRolPk(pk);
+
+            Solicitud_has_Estado objsalida = solicitudHasPrestamoService.inserta(soliobj);
+
+
+
+
+
+
+
+
+
+            if (objsalida == null) {
                 map.put("mensaje", "Error en actualizar");
             } else {
                 map.put("mensaje", "Actualización exitosa");
-                List<SolicitudPrestamos> lista = solicitudPrestamoService.BuscaNombreLike(objUsuario.getIdUsuario());
-                map.put("lista", lista);
             }
             return map;
         }
@@ -137,35 +142,32 @@ public class SolicitudPrestamoController {
         @PostMapping("/actualizaSolicitudPrestamosRechaza")
         @ResponseBody
         public Map<?, ?> actualizaRechasa(
-                @RequestParam("idSolicitudPrestamo") int idSolicitudPrestamo,
-                @RequestParam("monto") double monto,
-                @RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
-                @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
-                @RequestParam("dias") int dias,
-                @RequestParam("pagoDiario") double pagoDiario,
+                @RequestParam("soli") int idSolicitudPrestamo,
+
                 RedirectAttributes redirectAttributes, HttpSession session
         ) {
             HashMap<String, Object> map = new HashMap<String, Object>();
 
-            Usuario objUsuario = (Usuario) session.getAttribute("objUsuario");
 
 
-            SolicitudPrestamos s = new SolicitudPrestamos();
-            s.setIdSolicitudPrestamos(idSolicitudPrestamo);
-            s.setMonto(monto);
-            s.setFechaInicio(fechaInicio);
-            s.setFechaFin(fechaFin);
-            s.setDias(dias);
-            s.setPagodiario(pagoDiario);
-            s.setEstado(0);
 
-            SolicitudPrestamos objSalida = solicitudPrestamoService.actualizaSolicitudPrestamo(s);
-            if (objSalida == null) {
+            Solicitud_has_EstadoPK pk = new Solicitud_has_EstadoPK();
+            pk.setIdSolicitudPrestamos(idSolicitudPrestamo);
+            pk.setIdEstadoSoli(3);
+
+            Solicitud_has_Estado soliobj = new Solicitud_has_Estado();
+            soliobj.setSolicitudHasRolPk(pk);
+
+            Solicitud_has_Estado objsalida = solicitudHasPrestamoService.inserta(soliobj);
+
+
+
+
+
+            if (objsalida == null) {
                 map.put("mensaje", "Error en actualizar");
             } else {
                 map.put("mensaje", "Actualización exitosa");
-                List<SolicitudPrestamos> lista = solicitudPrestamoService.BuscaNombreLike(objUsuario.getIdUsuario());
-                map.put("lista", lista);
             }
             return map;
         }

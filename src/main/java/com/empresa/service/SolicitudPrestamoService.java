@@ -13,7 +13,7 @@ public interface SolicitudPrestamoService {
 
     public SolicitudPrestamos insertaSolicitudPrestamo(SolicitudPrestamos obj);
 
-    public List<SolicitudPrestamos> BuscaNombreLike(int id);
+    public List<SolicitudPrestamos> BuscaNombreLike(int usu,int usuPrest);
 
 
     public SolicitudPrestamos actualizaSolicitudPrestamo(SolicitudPrestamos obj);

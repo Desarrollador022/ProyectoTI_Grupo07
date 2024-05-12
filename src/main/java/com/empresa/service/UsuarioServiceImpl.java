@@ -62,4 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.listaPrestatariosLike(nombre, usureg);
 	}
 
+	@Override
+	public List<Usuario> listaPrestatarioNombre(int usureg) {
+		return repository.listaPrestatariosNombre(usureg);	}
+
 }
