@@ -141,16 +141,9 @@ public class SolicitudPrestamoController {
 
         @PostMapping("/actualizaSolicitudPrestamosRechaza")
         @ResponseBody
-        public Map<?, ?> actualizaRechasa(
-                @RequestParam("soli") int idSolicitudPrestamo,
+        public Map<?, ?> actualizaRechasa(@RequestParam("soli") int idSolicitudPrestamo, RedirectAttributes redirectAttributes, HttpSession session) {
 
-                RedirectAttributes redirectAttributes, HttpSession session
-        ) {
             HashMap<String, Object> map = new HashMap<String, Object>();
-
-
-
-
             Solicitud_has_EstadoPK pk = new Solicitud_has_EstadoPK();
             pk.setIdSolicitudPrestamos(idSolicitudPrestamo);
             pk.setIdEstadoSoli(3);
@@ -158,11 +151,8 @@ public class SolicitudPrestamoController {
             Solicitud_has_Estado soliobj = new Solicitud_has_Estado();
             soliobj.setSolicitudHasRolPk(pk);
 
+
             Solicitud_has_Estado objsalida = solicitudHasPrestamoService.inserta(soliobj);
-
-
-
-
 
             if (objsalida == null) {
                 map.put("mensaje", "Error en actualizar");

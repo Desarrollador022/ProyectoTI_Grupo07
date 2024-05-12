@@ -241,7 +241,7 @@
             $.ajax({
                 type: "POST",
                 url: "actualizaSolicitudPrestamosRechaza",
-                data: $('#id_form_actualiza').serialize(),
+                data: $('#id_form_registra').serialize(),
                 success: function(data){
                     agregarGrilla(data.lista);
                     $('#id_div_modal_registra').modal("hide");
